@@ -7,7 +7,8 @@ const process = document.querySelector('.process');
 const live = document.querySelector('.live');
 
 let a = 0, b = 0, operator = '';
-let stack = [];
+let word = []; //for DEL
+let stack = []; //for calculation
 let text = '';
 let temp = '';
 
@@ -21,6 +22,15 @@ buttons.forEach(button => button.addEventListener('click', function(){
     text = this.textContent;
     if(isNaN(Number(text)) == false || text == '.'){
         live.textContent += text;
+    } else if(text == 'Clear'){ // if '=' is pressed
+        live.textContent = '';
+        process.textContent = '';
+        stack = [];
+    }else if(text == 'DEL'){ // if '=' is pressed
+        word = live.textContent.split('');
+        word.splice(word.length-1, 1);
+        newWord = word.join('');
+        live.textContent = newWord;
     } else if(text == '='){ // if '=' is pressed
         process.textContent += live.textContent;
         stack.push(live.textContent);
